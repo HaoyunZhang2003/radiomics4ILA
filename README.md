@@ -1,37 +1,33 @@
 # radiomics4ILA
-Complete Processing of Radiomics of ILA (Interstitial lung abnormalities)
-Code availability for paper "Progression and mortality of interstitial lung abnormalities in patients with lung cancer resection: a single center report" (In submission)
 
-The whole process can be roughly divided into four parts
-1 Screening and quality control of raw data and conversion from dicom files to nii format
-  File:step1_dicom2nii.ipynb
-  According to the data storage format of our center, we completed the batch acquisition of the files of the highest resolution CT of each patient and converted them into nii.gz files for easy subsequent processing.
-  It's worth noting that this needs to be done in conjunction with the storage format. The core transformation code is dic2nii_sitk(path_read, path_save).
-  
-  
+This repository contains the complete processing pipeline for Radiomics Analysis of ILA (Interstitial Lung Abnormalities).
 
-2 Segmentation of lung CT images using existing neural networks to obtain left and right lung regions
- You need to install the github repository before using it, refer to https://github.com/JoHof/lungmask for more details
- File：step2_lung_region_segmentation.py
- This code implements the segmentation of all nii.gz files in a folder, for the lung region. The default model is U-net (R231), which is also used in this paper.
- 
-  
+**Code availability for paper "Progression and mortality of interstitial lung abnormalities in patients with lung cancer resection: a single center report" (In submission)**
 
-  
-3 Image radiomics feature extraction after the doctor manually corrects the regions
-  Before using, please install pyradiomics according to the official website: https://pyradiomics.readthedocs.io/en/latest/installation.html
-  Provides a sample inputCSV:step3_sample_inputCSV.csv, and a sample configuration file: exampleCT.yaml
-  File：step3_radiomics.py
-  The code accomplishes image radiomics feature extraction based on CT images and lesion area masks
+The entire process can be broadly divided into four parts:
 
+1. **Screening and quality control of raw data and conversion from DICOM files to NII format**
 
+    - **File**: `step1_dicom2nii.ipynb`
+    
+    We completed the batch acquisition of files of the highest resolution CT scans for each patient according to our center's data storage format. These files were then converted into NII.gz format for ease of subsequent processing. It's noteworthy that this step needs to be aligned with the storage format. The core transformation code is `dic2nii_sitk(path_read, path_save)`.
 
-4 Construct a machine learning model based on the image radiomics features
-  File: step4_ML_Progression_model.ipynb
-  A prediction model was built based on machine learning, which included model selection, model optimization, feedback of results and output of significant plots
+2. **Segmentation of lung CT images using existing neural networks to obtain left and right lung regions**
 
+    - **File**: `step2_lung_region_segmentation.py`
+    
+    Prior to usage, the GitHub repository needs to be installed. Please refer to [JoHof/lungmask](https://github.com/JoHof/lungmask) for detailed instructions. This code implements segmentation of all NII.gz files in a folder to isolate lung regions. The default model used is U-net (R231), which is also employed in this paper.
 
+3. **Image radiomics feature extraction after manual correction of regions by a clinician**
 
+    - **File**: `step3_radiomics.py`
+    
+    Before usage, please install PyRadiomics as per the instructions on the [official website](https://pyradiomics.readthedocs.io/en/latest/installation.html). This step provides a sample input CSV file (`step3_sample_inputCSV.csv`) and a sample configuration file (`exampleCT.yaml`). The code accomplishes image radiomics feature extraction based on CT images and manually corrected lesion area masks.
 
+4. **Construction of a machine learning model based on image radiomics features**
 
-Automatic segmentation models for different subtypes of lesions in ILA are being developed, which is expected to greatly reduce the workload of manually applying lesion regions in step 3.
+    - **File**: `step4_ML_Progression_model.ipynb`
+    
+    A prediction model was developed based on machine learning techniques. This included model selection, optimization, feedback of results, and generation of significant plots.
+
+Work is underway to develop automatic segmentation models for different subtypes of lesions in ILA. This is expected to significantly reduce the workload associated with manually delineating lesion regions in step 3.
