@@ -10,27 +10,31 @@ The entire process can be broadly divided into four parts:
 
     - **File**: `step1_dicom2nii.ipynb`
     
-   We completed the batch acquisition of files of the highest resolution CT scans for each patient according to our center's data storage format.
-   These files were then converted into NII.gz format for ease of subsequent processing.
-   It's noteworthy that this step needs to be aligned with the storage format. The core transformation code is `dic2nii_sitk(path_read, path_save)`.
+   We completed the batch acquisition of files of the highest resolution CT scans for each patient according to our center's data storage format.<br />
+   These files were then converted into NII.gz format for ease of subsequent processing.<br />
+   It's noteworthy that this step needs to be aligned with the storage format. The core transformation code is `dic2nii_sitk(path_read, path_save)`.<br />
 
 3. **Segmentation of lung CT images using existing neural networks to obtain left and right lung regions**
 
     - **File**: `step2_lung_region_segmentation.py`
     
-    Prior to usage, the GitHub repository needs to be installed. Please refer to [JoHof/lungmask](https://github.com/JoHof/lungmask) for detailed instructions. This code implements segmentation of all NII.gz files in a folder to isolate lung regions. The default model used is U-net (R231), which is also employed in this paper.
+    Prior to usage, the GitHub repository needs to be installed. Please refer to [JoHof/lungmask](https://github.com/JoHof/lungmask) for detailed instructions.<br />
+    This code implements segmentation of all NII.gz files in a folder to isolate lung regions. The default model used is U-net (R231), which is also employed in this paper.
 
 4. **Image radiomics feature extraction after manual correction of regions by a clinician**
 
     - **File**: `step3_radiomics.py`
     
-    Before usage, please install PyRadiomics as per the instructions on the [official website](https://pyradiomics.readthedocs.io/en/latest/installation.html). This step provides a sample input CSV file (`step3_sample_inputCSV.csv`) and a sample configuration file (`exampleCT.yaml`). The code accomplishes image radiomics feature extraction based on CT images and manually corrected lesion area masks.
+    Before usage, please install PyRadiomics as per the instructions on the [official website](https://pyradiomics.readthedocs.io/en/latest/installation.html). <br />
+    This step provides a sample input CSV file (`step3_sample_inputCSV.csv`) and a sample configuration file (`exampleCT.yaml`).<br />
+   The code accomplishes image radiomics feature extraction based on CT images and manually corrected lesion area masks.
 
-5. **Construction of a machine learning model based on image radiomics features**
+6. **Construction of a machine learning model based on image radiomics features**
 
     - **File**: `step4_ML_Progression_model.ipynb`
     
-    A prediction model was developed based on machine learning techniques. This included model selection, optimization, feedback of results, and generation of significant plots.
+    A prediction model was developed based on machine learning techniques.<br />
+    This included model selection, optimization, feedback of results, and generation of significant plots.<br />
    The data are examples only, not thesis research data, and are retained only to demonstrate the work accomplished by the code block
 
  **Environment:**
