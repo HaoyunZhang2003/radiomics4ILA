@@ -1,0 +1,4 @@
+ID,CT_time,Image,Mask
+patientA,20220711,data/image/patientA.nii.gz,data/mask/patientA.nii.gz
+patientB,20210810,data/image/patientB_20210810.nii.gz,data/mask/patientB_20210810.nii.gz
+patientC,20210702,data/image/patientC_20210702.nii.gz,data/mask/patientC_20210702.nii.gz
