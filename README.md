@@ -30,4 +30,14 @@ The entire process can be broadly divided into four parts:
     
     A prediction model was developed based on machine learning techniques. This included model selection, optimization, feedback of results, and generation of significant plots.
 
+ **Environment:**
+- Python 3.9.13 (Guido van Rossum, Python Software Foundation)
+
+**Versions of key Python packages:**
+- PyRadiomics 3.0.1
+- catboost 1.2
+- scikit-learn 1.0.2
+- numpy 1.21.6
+- scipy 1.9.1
+
 Work is underway to develop automatic segmentation models for different subtypes of lesions in ILA. This is expected to significantly reduce the workload associated with manually delineating lesion regions in step 3.
